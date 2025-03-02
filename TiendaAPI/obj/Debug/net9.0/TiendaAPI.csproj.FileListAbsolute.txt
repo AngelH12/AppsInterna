@@ -332,3 +332,4 @@ D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\TiendaAPI.pdb
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\TiendaAPI.genruntimeconfig.cache
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\ref\TiendaAPI.dll
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

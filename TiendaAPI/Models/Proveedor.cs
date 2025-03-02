@@ -8,7 +8,7 @@ namespace TiendaAPI.Models
         public int idProveedor { get; set; }
 
         [Required, StringLength(100)]
-        public string nombre { get; set; }
+        public string? nombre { get; set; }
 
         [StringLength(50)]
         public string? telefono { get; set; }

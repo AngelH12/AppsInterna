@@ -10,18 +10,18 @@ namespace TiendaAPI.Models
 
         [ForeignKey("Pedido")]
         public int idPedido { get; set; }
-        public Pedido Pedido { get; set; }
+        public Pedido? Pedido { get; set; }
 
         [ForeignKey("Producto")]
         public int idProducto { get; set; }
-        public Producto Producto { get; set; }
+        public Producto? Producto { get; set; }
 
         public int cantidad { get; set; }
 
         [Column(TypeName = "decimal(10,2)")]
-        public decimal precioUnitario { get; set; }
+        public decimal? precioUnitario { get; set; }
 
         [Column(TypeName = "decimal(10,2)")]
-        public decimal subtotal { get; set; }
+        public decimal? subtotal { get; set; }
     }
 }

@@ -1,6 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TiendaAPI.Data;
 using TiendaAPI.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +23,48 @@ var app = builder.Build();
 app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
 
+
+app.MapPost("/login", async (TiendaDbContext db, UsuarioLogin login) =>
+{
+    var user = await db.Usuarios.FirstOrDefaultAsync(u => u.Correo == login.Correo);
+    if (user == null || user.Contraseña != login.Contraseña)
+    {
+        return Results.Unauthorized();
+    }
+
+    var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, user.Nombre),
+        new Claim(ClaimTypes.Email, user.Correo),
+        new Claim(ClaimTypes.Role, user.Rol)
+    };
+
+    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("EsteEsUnSuperSecretoParaJWT123!"));
+    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+    var token = new JwtSecurityToken(
+        issuer: "TiendaAPI",
+        audience: "TiendaAPIUsers",
+        claims: claims,
+        expires: DateTime.UtcNow.AddMinutes(60),
+        signingCredentials: creds
+    );
+
+    return Results.Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(token), user.Rol });
+}).WithName("Login");
+
+app.MapGet("/usuarios", async (TiendaDbContext db) =>
+{
+    try
+    {
+        var usuarios = await db.Usuarios.ToListAsync();
+        return Results.Ok(usuarios);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al obtener usuarios: {ex.Message}");
+    }
+}).WithName("GetUsuarios");
 
 app.MapPost("/usuarios", async (TiendaDbContext db, Usuario usuario) =>
 {
@@ -59,6 +106,19 @@ app.MapDelete("/usuarios/{id}", async (TiendaDbContext db, int id) =>
     await db.SaveChangesAsync();
     return Results.NoContent();
 }).WithName("DeleteUsuario");
+
+app.MapGet("/productos", async (TiendaDbContext db) =>
+{
+    try
+    {
+        var productos = await db.Productos.ToListAsync();
+        return Results.Ok(productos);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al obtener productos: {ex.Message}");
+    }
+}).WithName("GetProductos");
 
 
 app.MapPost("/productos", async (TiendaDbContext db, Producto producto) =>
@@ -103,6 +163,19 @@ app.MapDelete("/productos/{id}", async (TiendaDbContext db, int id) =>
 }).WithName("DeleteProducto");
 
 
+app.MapGet("/ingredientes", async (TiendaDbContext db) =>
+{
+    try
+    {
+        var ingredientes = await db.Ingredientes.ToListAsync();
+        return Results.Ok(ingredientes);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al obtener ingredientes: {ex.Message}");
+    }
+}).WithName("GetIngredientes");
+
 
 app.MapPost("/ingredientes", async (TiendaDbContext db, Ingrediente ingrediente) =>
 {
@@ -145,6 +218,18 @@ app.MapDelete("/ingredientes/{id}", async (TiendaDbContext db, int id) =>
     return Results.NoContent();
 }).WithName("DeleteIngrediente");
 
+app.MapGet("/guarniciones", async (TiendaDbContext db) =>
+{
+    try
+    {
+        var guarniciones = await db.Guarniciones.ToListAsync();
+        return Results.Ok(guarniciones);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al obtener guarniciones: {ex.Message}");
+    }
+}).WithName("GetGuarniciones");
 
 app.MapPost("/guarniciones", async (TiendaDbContext db, Guarnicion guarnicion) =>
 {
@@ -181,6 +266,19 @@ app.MapDelete("/guarniciones/{id}", async (TiendaDbContext db, int id) =>
     await db.SaveChangesAsync();
     return Results.NoContent();
 }).WithName("DeleteGuarnicion");
+
+app.MapGet("/combos", async (TiendaDbContext db) =>
+{
+    try
+    {
+        var combos = await db.Combos.ToListAsync();
+        return Results.Ok(combos);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al obtener combos: {ex.Message}");
+    }
+}).WithName("GetCombos");
 
 
 app.MapPost("/combos", async (TiendaDbContext db, Combo combo) =>
@@ -219,6 +317,22 @@ app.MapDelete("/combos/{id}", async (TiendaDbContext db, int id) =>
     return Results.NoContent();
 }).WithName("DeleteCombo");
 
+app.MapGet("/detallecombo", async (TiendaDbContext db) =>
+{
+    try
+    {
+        var detalles = await db.DetalleCombo
+            .Include(dc => dc.Combo)
+            .Include(dc => dc.Producto)
+            .ToListAsync();
+        return Results.Ok(detalles);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al obtener DetalleCombo: {ex.Message}");
+    }
+}).WithName("GetDetalleCombo");
+
 
 app.MapPost("/detallecombo", async (TiendaDbContext db, DetalleCombo detalleCombo) =>
 {
@@ -236,6 +350,21 @@ app.MapDelete("/detallecombo/{id}", async (TiendaDbContext db, int id) =>
     await db.SaveChangesAsync();
     return Results.NoContent();
 }).WithName("DeleteDetalleCombo");
+
+app.MapGet("/pedidos", async (TiendaDbContext db) =>
+{
+    try
+    {
+        var pedidos = await db.Pedidos
+            .Include(p => p.Usuario)
+            .ToListAsync();
+        return Results.Ok(pedidos);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al obtener pedidos: {ex.Message}");
+    }
+}).WithName("GetPedidos");
 
 
 app.MapPost("/pedidos", async (TiendaDbContext db, Pedido pedido) =>
@@ -255,6 +384,22 @@ app.MapDelete("/pedidos/{id}", async (TiendaDbContext db, int id) =>
     return Results.NoContent();
 }).WithName("DeletePedido");
 
+app.MapGet("/detallepedido", async (TiendaDbContext db) =>
+{
+    try
+    {
+        var detalles = await db.DetallePedidos
+            .Include(dp => dp.Pedido)
+            .Include(dp => dp.Producto)
+            .ToListAsync();
+        return Results.Ok(detalles);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al obtener DetallePedido: {ex.Message}");
+    }
+}).WithName("GetDetallePedido");
+
 
 app.MapPost("/detallepedido", async (TiendaDbContext db, DetallePedido detalle) =>
 {
@@ -273,6 +418,21 @@ app.MapDelete("/detallepedido/{id}", async (TiendaDbContext db, int id) =>
     return Results.NoContent();
 }).WithName("DeleteDetallePedido");
 
+app.MapGet("/inventario", async (TiendaDbContext db) =>
+{
+    try
+    {
+        var inventarios = await db.Inventarios
+            .Include(i => i.Ingrediente)
+            .ToListAsync();
+        return Results.Ok(inventarios);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al obtener Inventario: {ex.Message}");
+    }
+}).WithName("GetInventario");
+
 
 app.MapPost("/inventario", async (TiendaDbContext db, Inventario inventario) =>
 {
@@ -290,6 +450,12 @@ app.MapDelete("/inventario/{id}", async (TiendaDbContext db, int id) =>
     await db.SaveChangesAsync();
     return Results.NoContent();
 }).WithName("DeleteInventario");
+
+app.MapGet("/proveedores", async (TiendaDbContext db) =>
+{
+    return Results.Ok(await db.Proveedores.ToListAsync());
+}).WithName("GetProveedores");
+
 
 
 app.MapPost("/proveedores", async (TiendaDbContext db, Proveedor proveedor) =>
@@ -314,6 +480,12 @@ app.MapDelete("/proveedores/{id}", async (TiendaDbContext db, int id) =>
     await db.SaveChangesAsync();
     return Results.NoContent();
 }).WithName("DeleteProveedor");
+
+app.MapGet("/reservas", async (TiendaDbContext db) =>
+{
+    return Results.Ok(await db.Reservas.ToListAsync());
+}).WithName("GetReservas");
+
 
 app.MapPost("/reservas", async (TiendaDbContext db, Reserva reserva) =>
 {
@@ -356,6 +528,11 @@ app.MapDelete("/reservas/{id}", async (TiendaDbContext db, int id) =>
     await db.SaveChangesAsync();
     return Results.NoContent();
 }).WithName("DeleteReserva");
+
+app.MapGet("/envios", async (TiendaDbContext db) =>
+{
+    return Results.Ok(await db.Envios.Include(e => e.Pedido).ToListAsync());
+}).WithName("GetEnvios");
 
 
 app.MapPost("/envios", async (TiendaDbContext db, Envio envio) =>

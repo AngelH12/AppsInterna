@@ -9,13 +9,13 @@ namespace TiendaAPI.Models
         public int idReserva { get; set; }
 
         [Required, StringLength(100)]
-        public string nombreCliente { get; set; }
+        public string? nombreCliente { get; set; }
 
-        public DateTime fecha { get; set; }
+        public DateTime? fecha { get; set; }
 
-        public int cantidadPersonas { get; set; }
+        public int? cantidadPersonas { get; set; }
 
         [StringLength(50)]
-        public string estado { get; set; }
+        public string? estado { get; set; }
     }
 }

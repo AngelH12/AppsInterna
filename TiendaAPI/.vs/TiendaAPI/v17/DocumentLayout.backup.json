@@ -7,14 +7,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Data\\TiendaDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\TiendaDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\DetallePedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\DetallePedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Envio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Envio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -23,12 +15,76 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Reserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\NotificationRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\NotificationRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\DetallePedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\DetallePedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Proveedor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Proveedor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\UsuarioLogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\UsuarioLogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\DetalleCombo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\DetalleCombo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Combo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Combo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Guarnicion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Guarnicion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Ingrediente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Ingrediente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\UsuariosController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\UsuariosController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\TiendaAPI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\TiendaAPI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\ProductosController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\ProductosController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\IngredientesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\IngredientesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\DetalleComboController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\DetalleComboController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\CombosController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\CombosController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Data\\TiendaDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\TiendaDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,59 +98,32 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Envio.cs",
-              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Envio.cs",
-              "RelativeDocumentMoniker": "Models\\Envio.cs",
-              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Envio.cs",
-              "RelativeToolTip": "Models\\Envio.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "UsuarioLogin.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\UsuarioLogin.cs",
+              "RelativeDocumentMoniker": "Models\\UsuarioLogin.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\UsuarioLogin.cs",
+              "RelativeToolTip": "Models\\UsuarioLogin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-02T05:38:43.106Z",
+              "WhenOpened": "2025-03-02T06:05:42.48Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Reserva.cs",
-              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Reserva.cs",
-              "RelativeDocumentMoniker": "Models\\Reserva.cs",
-              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Reserva.cs",
-              "RelativeToolTip": "Models\\Reserva.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 17,
+              "Title": "IngredientesController.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\IngredientesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\IngredientesController.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\IngredientesController.cs",
+              "RelativeToolTip": "Controllers\\IngredientesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-02T05:38:34.893Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-02T05:59:22.891Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Proveedor.cs",
-              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Proveedor.cs",
-              "RelativeDocumentMoniker": "Models\\Proveedor.cs",
-              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Proveedor.cs",
-              "RelativeToolTip": "Models\\Proveedor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-02T05:38:22.591Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TiendaDbContext.cs",
-              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Data\\TiendaDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\TiendaDbContext.cs",
-              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Data\\TiendaDbContext.cs",
-              "RelativeToolTip": "Data\\TiendaDbContext.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAswEAAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-02T05:29:24.556Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Inventario.cs",
               "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Inventario.cs",
               "RelativeDocumentMoniker": "Models\\Inventario.cs",
@@ -107,15 +136,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DetallePedido.cs",
-              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\DetallePedido.cs",
-              "RelativeDocumentMoniker": "Models\\DetallePedido.cs",
-              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\DetallePedido.cs",
-              "RelativeToolTip": "Models\\DetallePedido.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "Proveedor.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Proveedor.cs",
+              "RelativeDocumentMoniker": "Models\\Proveedor.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Proveedor.cs",
+              "RelativeToolTip": "Models\\Proveedor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-02T05:28:34.459Z",
+              "WhenOpened": "2025-03-02T05:38:22.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Reserva.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Reserva.cs",
+              "RelativeDocumentMoniker": "Models\\Reserva.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Reserva.cs",
+              "RelativeToolTip": "Models\\Reserva.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:38:34.893Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Usuario.cs",
+              "RelativeDocumentMoniker": "Models\\Usuario.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Usuario.cs",
+              "RelativeToolTip": "Models\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:57:27.844Z",
               "EditorCaption": ""
             },
             {
@@ -126,10 +181,186 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAOwBAAAAAAAAAAAswBoCAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAABkCAAAAAAAAAAAAABcCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-02T05:26:52.102Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Envio.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Envio.cs",
+              "RelativeDocumentMoniker": "Models\\Envio.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Envio.cs",
+              "RelativeToolTip": "Models\\Envio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:38:43.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DetallePedido.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\DetallePedido.cs",
+              "RelativeDocumentMoniker": "Models\\DetallePedido.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\DetallePedido.cs",
+              "RelativeToolTip": "Models\\DetallePedido.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:28:34.459Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NotificationRequest.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\NotificationRequest.cs",
+              "RelativeDocumentMoniker": "Models\\NotificationRequest.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\NotificationRequest.cs",
+              "RelativeToolTip": "Models\\NotificationRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:56:15.5Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Pedido.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Pedido.cs",
+              "RelativeDocumentMoniker": "Models\\Pedido.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Pedido.cs",
+              "RelativeToolTip": "Models\\Pedido.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:59:32.115Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Ingrediente.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Ingrediente.cs",
+              "RelativeDocumentMoniker": "Models\\Ingrediente.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Ingrediente.cs",
+              "RelativeToolTip": "Models\\Ingrediente.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:59:30.642Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Guarnicion.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Guarnicion.cs",
+              "RelativeDocumentMoniker": "Models\\Guarnicion.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Guarnicion.cs",
+              "RelativeToolTip": "Models\\Guarnicion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:59:29.931Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DetalleCombo.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\DetalleCombo.cs",
+              "RelativeDocumentMoniker": "Models\\DetalleCombo.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\DetalleCombo.cs",
+              "RelativeToolTip": "Models\\DetalleCombo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:59:28.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Combo.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Combo.cs",
+              "RelativeDocumentMoniker": "Models\\Combo.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Models\\Combo.cs",
+              "RelativeToolTip": "Models\\Combo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:59:28.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProductosController.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\ProductosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductosController.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\ProductosController.cs",
+              "RelativeToolTip": "Controllers\\ProductosController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:59:23.653Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "TiendaAPI.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\TiendaAPI.cs",
+              "RelativeDocumentMoniker": "Controllers\\TiendaAPI.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\TiendaAPI.cs",
+              "RelativeToolTip": "Controllers\\TiendaAPI.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:59:24.261Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UsuariosController.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\UsuariosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsuariosController.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\UsuariosController.cs",
+              "RelativeToolTip": "Controllers\\UsuariosController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:59:24.865Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "DetalleComboController.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\DetalleComboController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DetalleComboController.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\DetalleComboController.cs",
+              "RelativeToolTip": "Controllers\\DetalleComboController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:59:21.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "CombosController.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\CombosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CombosController.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Controllers\\CombosController.cs",
+              "RelativeToolTip": "Controllers\\CombosController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:59:20.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "TiendaDbContext.cs",
+              "DocumentMoniker": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Data\\TiendaDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\TiendaDbContext.cs",
+              "ToolTip": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\Data\\TiendaDbContext.cs",
+              "RelativeToolTip": "Data\\TiendaDbContext.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T05:29:24.556Z"
             }
           ]
         }

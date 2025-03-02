@@ -10,15 +10,15 @@ namespace TiendaAPI.Models
 
         [ForeignKey("Pedido")]
         public int idPedido { get; set; }
-        public Pedido Pedido { get; set; }
+        public Pedido? Pedido { get; set; }
 
         [StringLength(255)]
-        public string direccion { get; set; }
+        public string? direccion { get; set; }  
 
         [StringLength(50)]
-        public string telefono { get; set; }
+        public string? telefono { get; set; }
 
         [StringLength(50)]
-        public string estado { get; set; }
+        public string? estado { get; set; }  
     }
 }
