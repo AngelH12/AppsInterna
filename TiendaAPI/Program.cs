@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TiendaAPI.Data;
 using TiendaAPI.Models;
 
@@ -6,8 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<TiendaDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-
 
 builder.Services.AddCors(options =>
 {
@@ -17,373 +15,388 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-
 app.UseCors("AllowAllOrigins");
-
 app.UseHttpsRedirection();
 
 
-app.MapGet("/usuarios", async (TiendaDbContext db) =>
-{
-    try
-    {
-        var usuarios = await db.Usuarios.ToListAsync();
-        return Results.Ok(usuarios);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al obtener usuarios: {ex.Message}");
-    }
-}).WithName("GetUsuarios");
-
 app.MapPost("/usuarios", async (TiendaDbContext db, Usuario usuario) =>
 {
-    try
+    var usuarioExistente = await db.Usuarios.FirstOrDefaultAsync(u => u.Correo == usuario.Correo);
+    if (usuarioExistente != null)
     {
-        var usuarioExistente = await db.Usuarios.FirstOrDefaultAsync(u => u.Correo == usuario.Correo);
-        if (usuarioExistente != null)
-        {
-            return Results.Conflict($"El correo {usuario.Correo} ya est� registrado.");
-        }
+        return Results.Conflict($"El correo {usuario.Correo} ya está registrado.");
+    }
 
-        db.Usuarios.Add(usuario);
-        await db.SaveChangesAsync();
-        return Results.Created($"/usuarios/{usuario.IdUsuario}", usuario);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al crear usuario: {ex.Message}");
-    }
+    db.Usuarios.Add(usuario);
+    await db.SaveChangesAsync();
+    return Results.Created($"/usuarios/{usuario.IdUsuario}", usuario);
 }).WithName("CreateUsuario");
+
+app.MapPut("/usuarios/{id}", async (TiendaDbContext db, int id, Usuario usuario) =>
+{
+    if (id != usuario.IdUsuario)
+    {
+        return Results.BadRequest("El ID en la URL no coincide con el ID del usuario.");
+    }
+
+    var usuarioExistente = await db.Usuarios.FindAsync(id);
+    if (usuarioExistente == null)
+    {
+        return Results.NotFound($"Usuario con ID {id} no encontrado.");
+    }
+
+    db.Entry(usuarioExistente).CurrentValues.SetValues(usuario);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("UpdateUsuario");
 
 app.MapDelete("/usuarios/{id}", async (TiendaDbContext db, int id) =>
 {
     var usuario = await db.Usuarios.FindAsync(id);
-    if (usuario == null) return Results.NotFound();
+    if (usuario == null) return Results.NotFound($"Usuario con ID {id} no encontrado.");
 
     db.Usuarios.Remove(usuario);
     await db.SaveChangesAsync();
-
     return Results.NoContent();
 }).WithName("DeleteUsuario");
 
-app.MapGet("/productos", async (TiendaDbContext db) =>
-{
-    try
-    {
-        var productos = await db.Productos.ToListAsync();
-        return Results.Ok(productos);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al obtener productos: {ex.Message}");
-    }
-}).WithName("GetProductos");
 
 app.MapPost("/productos", async (TiendaDbContext db, Producto producto) =>
 {
-    try
+    var productoExistente = await db.Productos.FirstOrDefaultAsync(p => p.Nombre == producto.Nombre);
+    if (productoExistente != null)
     {
-        db.Productos.Add(producto);
-        await db.SaveChangesAsync();
-        return Results.Created($"/productos/{producto.IdProducto}", producto);
+        return Results.Conflict($"El producto {producto.Nombre} ya está registrado.");
     }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al crear producto: {ex.Message}");
-    }
+
+    db.Productos.Add(producto);
+    await db.SaveChangesAsync();
+    return Results.Created($"/productos/{producto.IdProducto}", producto);
 }).WithName("CreateProducto");
+
+app.MapPut("/productos/{id}", async (TiendaDbContext db, int id, Producto producto) =>
+{
+    if (id != producto.IdProducto)
+    {
+        return Results.BadRequest("El ID en la URL no coincide con el ID del producto.");
+    }
+
+    var productoExistente = await db.Productos.FindAsync(id);
+    if (productoExistente == null)
+    {
+        return Results.NotFound($"Producto con ID {id} no encontrado.");
+    }
+
+    db.Entry(productoExistente).CurrentValues.SetValues(producto);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("UpdateProducto");
 
 app.MapDelete("/productos/{id}", async (TiendaDbContext db, int id) =>
 {
-    try
-    {
-        var producto = await db.Productos.FindAsync(id);
-        if (producto == null) return Results.NotFound();
+    var producto = await db.Productos.FindAsync(id);
+    if (producto == null) return Results.NotFound($"Producto con ID {id} no encontrado.");
 
-        db.Productos.Remove(producto);
-        await db.SaveChangesAsync();
-
-        return Results.NoContent();
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al eliminar producto: {ex.Message}");
-    }
+    db.Productos.Remove(producto);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
 }).WithName("DeleteProducto");
 
-app.MapGet("/ingredientes", async (TiendaDbContext db) =>
-{
-    try
-    {
-        var ingredientes = await db.Ingredientes.ToListAsync();
-        return Results.Ok(ingredientes);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al obtener ingredientes: {ex.Message}");
-    }
-}).WithName("GetIngredientes");
+
 
 app.MapPost("/ingredientes", async (TiendaDbContext db, Ingrediente ingrediente) =>
 {
-    try
+    var ingredienteExistente = await db.Ingredientes.FirstOrDefaultAsync(i => i.nombre == ingrediente.nombre);
+    if (ingredienteExistente != null)
     {
-        db.Ingredientes.Add(ingrediente);
-        await db.SaveChangesAsync();
-        return Results.Created($"/ingredientes/{ingrediente.idIngrediente}", ingrediente);
+        return Results.Conflict($"El ingrediente {ingrediente.nombre} ya está registrado.");
     }
-    catch (Exception ex)
+
+    db.Ingredientes.Add(ingrediente);
+    await db.SaveChangesAsync();
+    return Results.Created($"/ingredientes/{ingrediente.idIngrediente}", ingrediente);
+}).WithName("CreateIngrediente");
+
+app.MapPut("/ingredientes/{id}", async (TiendaDbContext db, int id, Ingrediente ingrediente) =>
+{
+    if (id != ingrediente.idIngrediente)
     {
-        return Results.Problem($"Error al crear ingrediente: {ex.Message}");
+        return Results.BadRequest("El ID en la URL no coincide con el ID del ingrediente.");
     }
-}).WithName("CreateIngredientes");
+
+    var ingredienteExistente = await db.Ingredientes.FindAsync(id);
+    if (ingredienteExistente == null)
+    {
+        return Results.NotFound($"Ingrediente con ID {id} no encontrado.");
+    }
+
+    db.Entry(ingredienteExistente).CurrentValues.SetValues(ingrediente);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("UpdateIngrediente");
 
 app.MapDelete("/ingredientes/{id}", async (TiendaDbContext db, int id) =>
 {
-    try
-    {
-        var ingrediente = await db.Ingredientes.FindAsync(id);
-        if (ingrediente == null) return Results.NotFound();
+    var ingrediente = await db.Ingredientes.FindAsync(id);
+    if (ingrediente == null) return Results.NotFound($"Ingrediente con ID {id} no encontrado.");
 
-        db.Ingredientes.Remove(ingrediente);
-        await db.SaveChangesAsync();
+    db.Ingredientes.Remove(ingrediente);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("DeleteIngrediente");
 
-        return Results.NoContent();
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al eliminar ingrediente: {ex.Message}");
-    }
-}).WithName("DeleteIngredientes");
-
-app.MapGet("/guarniciones", async (TiendaDbContext db) =>
-{
-    try
-    {
-        var guarniciones = await db.Guarniciones.ToListAsync();
-        return Results.Ok(guarniciones);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al obtener guarniciones: {ex.Message}");
-    }
-}).WithName("GetGuarniciones");
 
 app.MapPost("/guarniciones", async (TiendaDbContext db, Guarnicion guarnicion) =>
 {
-    try
+    var guarnicionExistente = await db.Guarniciones.FirstOrDefaultAsync(g => g.nombre == guarnicion.nombre);
+    if (guarnicionExistente != null)
     {
-        db.Guarniciones.Add(guarnicion);
-        await db.SaveChangesAsync();
-        return Results.Created($"/guarniciones/{guarnicion.idGuarnicion}", guarnicion);
+        return Results.Conflict($"La guarnición {guarnicion.nombre} ya está registrada.");
     }
-    catch (Exception ex)
+
+    db.Guarniciones.Add(guarnicion);
+    await db.SaveChangesAsync();
+    return Results.Created($"/guarniciones/{guarnicion.idGuarnicion}", guarnicion);
+}).WithName("CreateGuarnicion");
+
+app.MapPut("/guarniciones/{id}", async (TiendaDbContext db, int id, Guarnicion guarnicion) =>
+{
+    var guarnicionExistente = await db.Guarniciones.FindAsync(id);
+    if (guarnicionExistente == null)
     {
-        return Results.Problem($"Error al crear guarnici�n: {ex.Message}");
+        return Results.NotFound($"Guarnición con ID {id} no encontrada.");
     }
-}).WithName("CreateGuarniciones");
+
+    db.Entry(guarnicionExistente).CurrentValues.SetValues(guarnicion);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("UpdateGuarnicion");
 
 app.MapDelete("/guarniciones/{id}", async (TiendaDbContext db, int id) =>
 {
-    try
-    {
-        var guarnicion = await db.Guarniciones.FindAsync(id);
-        if (guarnicion == null) return Results.NotFound();
+    var guarnicion = await db.Guarniciones.FindAsync(id);
+    if (guarnicion == null) return Results.NotFound($"Guarnición con ID {id} no encontrada.");
 
-        db.Guarniciones.Remove(guarnicion);
-        await db.SaveChangesAsync();
+    db.Guarniciones.Remove(guarnicion);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("DeleteGuarnicion");
 
-        return Results.NoContent();
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al eliminar guarnici�n: {ex.Message}");
-    }
-}).WithName("DeleteGuarniciones");
-
-app.MapGet("/combos", async (TiendaDbContext db) =>
-{
-    try
-    {
-        var combos = await db.Combos.ToListAsync();
-        return Results.Ok(combos);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al obtener combos: {ex.Message}");
-    }
-}).WithName("GetCombos");
 
 app.MapPost("/combos", async (TiendaDbContext db, Combo combo) =>
 {
-    try
+    var comboExistente = await db.Combos.FirstOrDefaultAsync(c => c.nombre == combo.nombre);
+    if (comboExistente != null)
     {
-        db.Combos.Add(combo);
-        await db.SaveChangesAsync();
-        return Results.Created($"/combos/{combo.idCombo}", combo);
+        return Results.Conflict($"El combo {combo.nombre} ya está registrado.");
     }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al crear combo: {ex.Message}");
-    }
+
+    db.Combos.Add(combo);
+    await db.SaveChangesAsync();
+    return Results.Created($"/combos/{combo.idCombo}", combo);
 }).WithName("CreateCombo");
+
+app.MapPut("/combos/{id}", async (TiendaDbContext db, int id, Combo combo) =>
+{
+    var comboExistente = await db.Combos.FindAsync(id);
+    if (comboExistente == null)
+    {
+        return Results.NotFound($"Combo con ID {id} no encontrado.");
+    }
+
+    db.Entry(comboExistente).CurrentValues.SetValues(combo);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("UpdateCombo");
 
 app.MapDelete("/combos/{id}", async (TiendaDbContext db, int id) =>
 {
-    try
-    {
-        var combo = await db.Combos.FindAsync(id);
-        if (combo == null) return Results.NotFound();
+    var combo = await db.Combos.FindAsync(id);
+    if (combo == null) return Results.NotFound($"Combo con ID {id} no encontrado.");
 
-        db.Combos.Remove(combo);
-        await db.SaveChangesAsync();
+    db.Combos.Remove(combo);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("DeleteCombo");
 
-        return Results.NoContent();
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al eliminar combo: {ex.Message}");
-    }
-}).WithName("DeleteCombos");
-
-
-
-app.MapGet("/detallecombo", async (TiendaDbContext db) =>
-{
-    try
-    {
-        var detalles = await db.DetalleCombo
-            .Include(dc => dc.Combo)
-            .Include(dc => dc.Producto)
-            .ToListAsync();
-        return Results.Ok(detalles);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al obtener DetalleCombo: {ex.Message}");
-    }
-}).WithName("GetDetalleCombo");
-
-app.MapGet("/detallecombo/{id}", async (TiendaDbContext db, int id) =>
-{
-    try
-    {
-        var detalle = await db.DetalleCombo
-            .Include(dc => dc.Combo)
-            .Include(dc => dc.Producto)
-            .FirstOrDefaultAsync(dc => dc.idDetalleCombo == id);
-
-        if (detalle == null)
-            return Results.NotFound($"DetalleCombo con ID {id} no encontrado.");
-
-        return Results.Ok(detalle);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al obtener DetalleCombo: {ex.Message}");
-    }
-}).WithName("GetDetalleComboById");
 
 app.MapPost("/detallecombo", async (TiendaDbContext db, DetalleCombo detalleCombo) =>
 {
-    try
-    {
-        db.DetalleCombo.Add(detalleCombo);
-        await db.SaveChangesAsync();
-        return Results.Created($"/detallecombo/{detalleCombo.idDetalleCombo}", detalleCombo);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al crear DetalleCombo: {ex.Message}");
-    }
+    db.DetalleCombo.Add(detalleCombo);
+    await db.SaveChangesAsync();
+    return Results.Created($"/detallecombo/{detalleCombo.idDetalleCombo}", detalleCombo);
 }).WithName("CreateDetalleCombo");
 
 app.MapDelete("/detallecombo/{id}", async (TiendaDbContext db, int id) =>
 {
-    try
-    {
-        var detalle = await db.DetalleCombo.FindAsync(id);
-        if (detalle == null)
-            return Results.NotFound();
+    var detalle = await db.DetalleCombo.FindAsync(id);
+    if (detalle == null) return Results.NotFound($"DetalleCombo con ID {id} no encontrado.");
 
-        db.DetalleCombo.Remove(detalle);
-        await db.SaveChangesAsync();
-
-        return Results.NoContent();
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al eliminar DetalleCombo: {ex.Message}");
-    }
+    db.DetalleCombo.Remove(detalle);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
 }).WithName("DeleteDetalleCombo");
 
 
-app.MapGet("/pedidos", async (TiendaDbContext db) =>
-{
-    try
-    {
-        var pedidos = await db.Pedidos
-            .Include(p => p.Usuario)
-            .ToListAsync();
-        return Results.Ok(pedidos);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al obtener pedidos: {ex.Message}");
-    }
-}).WithName("GetPedidos");
-
-app.MapGet("/pedidos/{id}", async (TiendaDbContext db, int id) =>
-{
-    try
-    {
-        var pedido = await db.Pedidos
-            .Include(p => p.Usuario)
-            .FirstOrDefaultAsync(p => p.idPedido == id);
-
-        if (pedido == null)
-            return Results.NotFound($"Pedido con ID {id} no encontrado.");
-
-        return Results.Ok(pedido);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al obtener pedido: {ex.Message}");
-    }
-}).WithName("GetPedidoById");
-
 app.MapPost("/pedidos", async (TiendaDbContext db, Pedido pedido) =>
 {
-    try
-    {
-        db.Pedidos.Add(pedido);
-        await db.SaveChangesAsync();
-        return Results.Created($"/pedidos/{pedido.idPedido}", pedido);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al crear pedido: {ex.Message}");
-    }
+    db.Pedidos.Add(pedido);
+    await db.SaveChangesAsync();
+    return Results.Created($"/pedidos/{pedido.idPedido}", pedido);
 }).WithName("CreatePedido");
 
 app.MapDelete("/pedidos/{id}", async (TiendaDbContext db, int id) =>
 {
-    try
-    {
-        var pedido = await db.Pedidos.FindAsync(id);
-        if (pedido == null)
-            return Results.NotFound();
+    var pedido = await db.Pedidos.FindAsync(id);
+    if (pedido == null) return Results.NotFound($"Pedido con ID {id} no encontrado.");
 
-        db.Pedidos.Remove(pedido);
-        await db.SaveChangesAsync();
-
-        return Results.NoContent();
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Error al eliminar pedido: {ex.Message}");
-    }
+    db.Pedidos.Remove(pedido);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
 }).WithName("DeletePedido");
+
+
+app.MapPost("/detallepedido", async (TiendaDbContext db, DetallePedido detalle) =>
+{
+    db.DetallePedidos.Add(detalle);
+    await db.SaveChangesAsync();
+    return Results.Created($"/detallepedido/{detalle.idDetallePedido}", detalle);
+}).WithName("CreateDetallePedido");
+
+app.MapDelete("/detallepedido/{id}", async (TiendaDbContext db, int id) =>
+{
+    var detalle = await db.DetallePedidos.FindAsync(id);
+    if (detalle == null) return Results.NotFound($"DetallePedido con ID {id} no encontrado.");
+
+    db.DetallePedidos.Remove(detalle);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("DeleteDetallePedido");
+
+
+app.MapPost("/inventario", async (TiendaDbContext db, Inventario inventario) =>
+{
+    db.Inventarios.Add(inventario);
+    await db.SaveChangesAsync();
+    return Results.Created($"/inventario/{inventario.idInventario}", inventario);
+}).WithName("CreateInventario");
+
+app.MapDelete("/inventario/{id}", async (TiendaDbContext db, int id) =>
+{
+    var inventario = await db.Inventarios.FindAsync(id);
+    if (inventario == null) return Results.NotFound($"Inventario con ID {id} no encontrado.");
+
+    db.Inventarios.Remove(inventario);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("DeleteInventario");
+
+
+app.MapPost("/proveedores", async (TiendaDbContext db, Proveedor proveedor) =>
+{
+    var proveedorExistente = await db.Proveedores.FirstOrDefaultAsync(p => p.nombre == proveedor.nombre);
+    if (proveedorExistente != null)
+    {
+        return Results.Conflict($"El proveedor {proveedor.nombre} ya está registrado.");
+    }
+
+    db.Proveedores.Add(proveedor);
+    await db.SaveChangesAsync();
+    return Results.Created($"/proveedores/{proveedor.idProveedor}", proveedor);
+}).WithName("CreateProveedor");
+
+app.MapDelete("/proveedores/{id}", async (TiendaDbContext db, int id) =>
+{
+    var proveedor = await db.Proveedores.FindAsync(id);
+    if (proveedor == null) return Results.NotFound($"Proveedor con ID {id} no encontrado.");
+
+    db.Proveedores.Remove(proveedor);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("DeleteProveedor");
+
+app.MapPost("/reservas", async (TiendaDbContext db, Reserva reserva) =>
+{
+    var reservaExistente = await db.Reservas.FirstOrDefaultAsync(r =>
+        r.nombreCliente == reserva.nombreCliente && r.fecha == reserva.fecha);
+    if (reservaExistente != null)
+    {
+        return Results.Conflict($"Ya existe una reserva para {reserva.nombreCliente} en la fecha {reserva.fecha}.");
+    }
+
+    db.Reservas.Add(reserva);
+    await db.SaveChangesAsync();
+    return Results.Created($"/reservas/{reserva.idReserva}", reserva);
+}).WithName("CreateReserva");
+
+app.MapPut("/reservas/{id}", async (TiendaDbContext db, int id, Reserva reserva) =>
+{
+    if (id != reserva.idReserva)
+    {
+        return Results.BadRequest("El ID en la URL no coincide con el ID de la reserva.");
+    }
+
+    var reservaExistente = await db.Reservas.FindAsync(id);
+    if (reservaExistente == null)
+    {
+        return Results.NotFound($"Reserva con ID {id} no encontrada.");
+    }
+
+    db.Entry(reservaExistente).CurrentValues.SetValues(reserva);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("UpdateReserva");
+
+app.MapDelete("/reservas/{id}", async (TiendaDbContext db, int id) =>
+{
+    var reserva = await db.Reservas.FindAsync(id);
+    if (reserva == null) return Results.NotFound($"Reserva con ID {id} no encontrada.");
+
+    db.Reservas.Remove(reserva);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("DeleteReserva");
+
+
+app.MapPost("/envios", async (TiendaDbContext db, Envio envio) =>
+{
+    var envioExistente = await db.Envios.FirstOrDefaultAsync(e => e.idPedido == envio.idPedido);
+    if (envioExistente != null)
+    {
+        return Results.Conflict($"Ya existe un envío para el pedido con ID {envio.idPedido}.");
+    }
+
+    db.Envios.Add(envio);
+    await db.SaveChangesAsync();
+    return Results.Created($"/envios/{envio.idEnvio}", envio);
+}).WithName("CreateEnvio");
+
+app.MapPut("/envios/{id}", async (TiendaDbContext db, int id, Envio envio) =>
+{
+    if (id != envio.idEnvio)
+    {
+        return Results.BadRequest("El ID en la URL no coincide con el ID del envío.");
+    }
+
+    var envioExistente = await db.Envios.FindAsync(id);
+    if (envioExistente == null)
+    {
+        return Results.NotFound($"Envío con ID {id} no encontrado.");
+    }
+
+    db.Entry(envioExistente).CurrentValues.SetValues(envio);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("UpdateEnvio");
+
+app.MapDelete("/envios/{id}", async (TiendaDbContext db, int id) =>
+{
+    var envio = await db.Envios.FindAsync(id);
+    if (envio == null) return Results.NotFound($"Envío con ID {id} no encontrado.");
+
+    db.Envios.Remove(envio);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("DeleteEnvio");
 
 app.Run();

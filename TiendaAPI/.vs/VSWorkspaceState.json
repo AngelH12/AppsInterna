@@ -4,9 +4,8 @@
     "\\Controllers",
     "\\Data",
     "\\Models",
-    "\\obj",
     "\\Properties"
   ],
-  "SelectedNode": "\\Controllers\\TiendaAPI.cs",
+  "SelectedNode": "\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -1,11 +1,25 @@
-//namespace TiendaAPI.Models;
+using System.ComponentModel.DataAnnotations;
 
-//public class Proveedor
-//{
-//    public int idProveedor { get; set; }
-//    public string nombre { get; set; }
-//    public string telefono { get; set; }
-//    public string direccion { get; set; }
-//    public string correo { get; set; }
-//    public string tipoProducto { get; set; }
-//}
+namespace TiendaAPI.Models
+{
+    public class Proveedor
+    {
+        [Key]
+        public int idProveedor { get; set; }
+
+        [Required, StringLength(100)]
+        public string nombre { get; set; }
+
+        [StringLength(50)]
+        public string? telefono { get; set; }
+
+        [StringLength(255)]
+        public string? direccion { get; set; }
+
+        [EmailAddress, StringLength(100)]
+        public string? correo { get; set; }
+
+        [StringLength(50)]
+        public string? tipoProducto { get; set; }
+    }
+}

@@ -1,10 +1,21 @@
-//namespace TiendaAPI.Models;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-//public class Reserva
-//{
-//    public int idReserva { get; set; }
-//    public string nombreCliente { get; set; }
-//    public DateTime fecha { get; set; }
-//    public int cantidadPersonas { get; set; }
-//    public string estado { get; set; }
-//}
+namespace TiendaAPI.Models
+{
+    public class Reserva
+    {
+        [Key]
+        public int idReserva { get; set; }
+
+        [Required, StringLength(100)]
+        public string nombreCliente { get; set; }
+
+        public DateTime fecha { get; set; }
+
+        public int cantidadPersonas { get; set; }
+
+        [StringLength(50)]
+        public string estado { get; set; }
+    }
+}

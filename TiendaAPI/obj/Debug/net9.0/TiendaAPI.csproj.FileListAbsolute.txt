@@ -325,10 +325,10 @@ D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\staticwebasse
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.TiendaAPI.props
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.TiendaAPI.props
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\staticwebassets.pack.json
-D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\TiendaAPI.csproj.Up2Date
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\TiendaAPI.dll
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\refint\TiendaAPI.dll
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\TiendaAPI.pdb
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\TiendaAPI.genruntimeconfig.cache
 D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\ref\TiendaAPI.dll
+D:\Soluciones\PruebaGenesis\AppsInterna\TiendaAPI\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
