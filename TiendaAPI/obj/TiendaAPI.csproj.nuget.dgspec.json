@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\TiendaAPI.csproj": {}
+    "D:\\Soluciones\\Genesis\\PRUEBAINOVACION\\AppsInterna\\TiendaAPI\\TiendaAPI.csproj": {}
   },
   "projects": {
-    "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\TiendaAPI.csproj": {
+    "D:\\Soluciones\\Genesis\\PRUEBAINOVACION\\AppsInterna\\TiendaAPI\\TiendaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\TiendaAPI.csproj",
+        "projectUniqueName": "D:\\Soluciones\\Genesis\\PRUEBAINOVACION\\AppsInterna\\TiendaAPI\\TiendaAPI.csproj",
         "projectName": "TiendaAPI",
-        "projectPath": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\TiendaAPI.csproj",
+        "projectPath": "D:\\Soluciones\\Genesis\\PRUEBAINOVACION\\AppsInterna\\TiendaAPI\\TiendaAPI.csproj",
         "packagesPath": "C:\\Users\\angel\\.nuget\\packages\\",
-        "outputPath": "D:\\Soluciones\\PruebaGenesis\\AppsInterna\\TiendaAPI\\obj\\",
+        "outputPath": "D:\\Soluciones\\Genesis\\PRUEBAINOVACION\\AppsInterna\\TiendaAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -51,6 +51,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[9.0.2, )"

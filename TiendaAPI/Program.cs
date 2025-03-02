@@ -3,9 +3,11 @@ using TiendaAPI.Data;
 using TiendaAPI.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using BCrypt.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,28 @@ builder.Services.AddCors(options =>
         builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
+
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var key = Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = true,
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidateAudience = true,
+            ValidAudience = jwtSettings["Audience"],
+            ValidateLifetime = true
+        };
+    });
+
 var app = builder.Build();
 
 app.UseCors("AllowAllOrigins");
@@ -27,20 +51,27 @@ app.UseHttpsRedirection();
 app.MapPost("/login", async (TiendaDbContext db, UsuarioLogin login) =>
 {
     var user = await db.Usuarios.FirstOrDefaultAsync(u => u.Correo == login.Correo);
-    if (user == null || user.Contraseña != login.Contraseña)
+
+    if (user == null)
     {
-        return Results.Unauthorized();
+        return Results.Json(new { message = "El usuario no está registrado." }, statusCode: 404);
+    }
+
+    if (!BCrypt.Net.BCrypt.Verify(login.Contraseña, user.Contraseña))
+    {
+        return Results.Json(new { message = "Credenciales incorrectas." }, statusCode: 401);
     }
 
     var claims = new List<Claim>
     {
-        new Claim(ClaimTypes.Name, user.Nombre),
-        new Claim(ClaimTypes.Email, user.Correo),
-        new Claim(ClaimTypes.Role, user.Rol)
+        new Claim(ClaimTypes.Name, user.Nombre ?? ""),
+        new Claim(ClaimTypes.Email, user.Correo ?? ""),
+        new Claim(ClaimTypes.Role, user.Rol ?? "")
     };
 
-    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("EsteEsUnSuperSecretoParaJWT123!"));
-    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+    var secretKey = "EsteEsUnSuperSecretoParaJWT123456789012345!";
+    var key = Encoding.UTF8.GetBytes(secretKey);
+    var creds = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
 
     var token = new JwtSecurityToken(
         issuer: "TiendaAPI",
@@ -50,8 +81,9 @@ app.MapPost("/login", async (TiendaDbContext db, UsuarioLogin login) =>
         signingCredentials: creds
     );
 
-    return Results.Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(token), user.Rol });
+    return Results.Ok(new { message = "Inicio de sesión exitoso.", Token = new JwtSecurityTokenHandler().WriteToken(token), user.Rol });
 }).WithName("Login");
+
 
 app.MapGet("/usuarios", async (TiendaDbContext db) =>
 {

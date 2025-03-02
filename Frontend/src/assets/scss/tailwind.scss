@@ -1,0 +1,18 @@
+
+@import "fonts/fonts";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "plugins/gridjs";
+@import "plugins/select";
+@import "plugins/multi-select";
+
+
+
+.group\/menu-link:hover,
+.animate {
+   animation-iteration-count: 2;
+   stroke-dasharray: 10;
+}
