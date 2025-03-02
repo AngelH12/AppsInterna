@@ -30,7 +30,7 @@ const Sidebar = ({ layoutType, layoutSidebarSizeType }: any) => {
             <span className="flex items-center space-x-4 group-data-[sidebar-size=sm]:hidden">
               <Building2 />
               <div>
-                <div className="text-sm text-gray-600">Sistema de gestion pedidos y productos.</div>
+                <div className="text-sm text-gray-600">Restaurante.</div>
               </div>
             </span>
           </Link>

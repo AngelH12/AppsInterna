@@ -2,7 +2,7 @@ import withRouter from "Common/withRouter";
 import { LoginView } from "feature";
 
 const Login = (props: any) => {
-  document.title = "Login | Visitas";
+  document.title = "Login";
 
   return <LoginView></LoginView>;
 };

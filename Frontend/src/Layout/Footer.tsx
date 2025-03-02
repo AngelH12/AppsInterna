@@ -7,7 +7,7 @@ const Footer = () => {
                 <div className="group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl w-full">
                     <div className="grid items-center grid-cols-1 text-center lg:grid-cols-2 text-slate-400 dark:text-zink-200 ltr:lg:text-left rtl:lg:text-right">
                         <div>
-                            {new Date().getFullYear()} © Tu solución para la gestión de visitas empresariales.
+                            {new Date().getFullYear()} © Tu solución para la gestión de tu empresa.
                         </div>
                    
                     </div>

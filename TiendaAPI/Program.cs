@@ -103,41 +103,78 @@ app.MapPost("/usuarios", async (TiendaDbContext db, Usuario usuario) =>
     var usuarioExistente = await db.Usuarios.FirstOrDefaultAsync(u => u.Correo == usuario.Correo);
     if (usuarioExistente != null)
     {
-        return Results.Conflict($"El correo {usuario.Correo} ya está registrado.");
+        return Results.Conflict(new
+        {
+            success = false,
+            message = $"El correo {usuario.Correo} ya está registrado."
+        });
     }
 
     db.Usuarios.Add(usuario);
     await db.SaveChangesAsync();
-    return Results.Created($"/usuarios/{usuario.IdUsuario}", usuario);
+
+    return Results.Created($"/usuarios/{usuario.IdUsuario}", new
+    {
+        success = true,
+        message = "Usuario creado exitosamente.",
+        usuario
+    });
 }).WithName("CreateUsuario");
 
 app.MapPut("/usuarios/{id}", async (TiendaDbContext db, int id, Usuario usuario) =>
 {
     if (id != usuario.IdUsuario)
     {
-        return Results.BadRequest("El ID en la URL no coincide con el ID del usuario.");
+        return Results.BadRequest(new
+        {
+            success = false,
+            message = "El ID en la URL no coincide con el ID del usuario."
+        });
     }
 
     var usuarioExistente = await db.Usuarios.FindAsync(id);
     if (usuarioExistente == null)
     {
-        return Results.NotFound($"Usuario con ID {id} no encontrado.");
+        return Results.NotFound(new
+        {
+            success = false,
+            message = $"Usuario con ID {id} no encontrado."
+        });
     }
 
     db.Entry(usuarioExistente).CurrentValues.SetValues(usuario);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Usuario actualizado correctamente."
+    });
 }).WithName("UpdateUsuario");
 
 app.MapDelete("/usuarios/{id}", async (TiendaDbContext db, int id) =>
 {
     var usuario = await db.Usuarios.FindAsync(id);
-    if (usuario == null) return Results.NotFound($"Usuario con ID {id} no encontrado.");
+    if (usuario == null)
+    {
+        return Results.NotFound(new
+        {
+            success = false,
+            message = $"Usuario con ID {id} no encontrado."
+        });
+    }
 
     db.Usuarios.Remove(usuario);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Usuario eliminado exitosamente."
+    });
 }).WithName("DeleteUsuario");
+
+
 
 app.MapGet("/productos", async (TiendaDbContext db) =>
 {
@@ -158,13 +195,19 @@ app.MapPost("/productos", async (TiendaDbContext db, Producto producto) =>
     var productoExistente = await db.Productos.FirstOrDefaultAsync(p => p.Nombre == producto.Nombre);
     if (productoExistente != null)
     {
-        return Results.Conflict($"El producto {producto.Nombre} ya está registrado.");
+        return Results.Conflict(new { message = $"El producto {producto.Nombre} ya está registrado." });
     }
 
     db.Productos.Add(producto);
     await db.SaveChangesAsync();
-    return Results.Created($"/productos/{producto.IdProducto}", producto);
+
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("CreateProducto");
+
 
 app.MapPut("/productos/{id}", async (TiendaDbContext db, int id, Producto producto) =>
 {
@@ -181,7 +224,11 @@ app.MapPut("/productos/{id}", async (TiendaDbContext db, int id, Producto produc
 
     db.Entry(productoExistente).CurrentValues.SetValues(producto);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("UpdateProducto");
 
 app.MapDelete("/productos/{id}", async (TiendaDbContext db, int id) =>
@@ -191,7 +238,11 @@ app.MapDelete("/productos/{id}", async (TiendaDbContext db, int id) =>
 
     db.Productos.Remove(producto);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("DeleteProducto");
 
 
@@ -273,7 +324,11 @@ app.MapPost("/guarniciones", async (TiendaDbContext db, Guarnicion guarnicion) =
 
     db.Guarniciones.Add(guarnicion);
     await db.SaveChangesAsync();
-    return Results.Created($"/guarniciones/{guarnicion.idGuarnicion}", guarnicion);
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("CreateGuarnicion");
 
 app.MapPut("/guarniciones/{id}", async (TiendaDbContext db, int id, Guarnicion guarnicion) =>
@@ -286,7 +341,11 @@ app.MapPut("/guarniciones/{id}", async (TiendaDbContext db, int id, Guarnicion g
 
     db.Entry(guarnicionExistente).CurrentValues.SetValues(guarnicion);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("UpdateGuarnicion");
 
 app.MapDelete("/guarniciones/{id}", async (TiendaDbContext db, int id) =>
@@ -296,7 +355,11 @@ app.MapDelete("/guarniciones/{id}", async (TiendaDbContext db, int id) =>
 
     db.Guarniciones.Remove(guarnicion);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("DeleteGuarnicion");
 
 app.MapGet("/combos", async (TiendaDbContext db) =>
@@ -323,7 +386,11 @@ app.MapPost("/combos", async (TiendaDbContext db, Combo combo) =>
 
     db.Combos.Add(combo);
     await db.SaveChangesAsync();
-    return Results.Created($"/combos/{combo.idCombo}", combo);
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("CreateCombo");
 
 app.MapPut("/combos/{id}", async (TiendaDbContext db, int id, Combo combo) =>
@@ -336,7 +403,11 @@ app.MapPut("/combos/{id}", async (TiendaDbContext db, int id, Combo combo) =>
 
     db.Entry(comboExistente).CurrentValues.SetValues(combo);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("UpdateCombo");
 
 app.MapDelete("/combos/{id}", async (TiendaDbContext db, int id) =>
@@ -346,7 +417,11 @@ app.MapDelete("/combos/{id}", async (TiendaDbContext db, int id) =>
 
     db.Combos.Remove(combo);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("DeleteCombo");
 
 app.MapGet("/detallecombo", async (TiendaDbContext db) =>
@@ -357,7 +432,11 @@ app.MapGet("/detallecombo", async (TiendaDbContext db) =>
             .Include(dc => dc.Combo)
             .Include(dc => dc.Producto)
             .ToListAsync();
-        return Results.Ok(detalles);
+        return Results.Ok(new
+        {
+            success = true,
+            message = "Accion creada correctamente."
+        });
     }
     catch (Exception ex)
     {
