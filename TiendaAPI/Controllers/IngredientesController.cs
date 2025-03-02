@@ -2,26 +2,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TiendaAPI.Data;
 using TiendaAPI.Models;
+
 namespace TiendaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductosController : ControllerBase
+    public class IngredientesController : ControllerBase
     {
         private readonly TiendaDbContext _context;
 
-        public ProductosController(TiendaDbContext context)
+        public IngredientesController(TiendaDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
+        public async Task<ActionResult<IEnumerable<Ingrediente>>> GetIngredientes()
         {
             try
             {
-                var productos = await _context.Productos.ToListAsync();
-                return Ok(productos);
+                var ingredientes = await _context.Ingredientes.ToListAsync();
+                return Ok(ingredientes);
             }
             catch (Exception ex)
             {
@@ -30,18 +31,17 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Producto>> GetProducto(int id)
+        public async Task<ActionResult<Ingrediente>> GetIngrediente(int id)
         {
             try
             {
-                var producto = await _context.Productos.FindAsync(id);
-
-                if (producto == null)
+                var ingrediente = await _context.Ingredientes.FindAsync(id);
+                if (ingrediente == null)
                 {
-                    return NotFound($"Producto con id {id} no encontrado");
+                    return NotFound($"Ingrediente con ID {id} no encontrado.");
                 }
 
-                return Ok(producto);
+                return Ok(ingrediente);
             }
             catch (Exception ex)
             {
@@ -50,19 +50,19 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Producto>> PostProducto(Producto producto)
+        public async Task<ActionResult<Ingrediente>> PostIngrediente(Ingrediente ingrediente)
         {
             try
             {
-                if (producto == null)
+                if (ingrediente == null)
                 {
-                    return BadRequest("El producto no puede ser nulo");
+                    return BadRequest("El ingrediente no puede ser nulo.");
                 }
 
-                _context.Productos.Add(producto);
+                _context.Ingredientes.Add(ingrediente);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetProducto), new { id = producto.IdProducto }, producto);
+                return CreatedAtAction(nameof(GetIngrediente), new { id = ingrediente.idIngrediente }, ingrediente);
             }
             catch (Exception ex)
             {
@@ -71,24 +71,24 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto(int id, Producto producto)
+        public async Task<IActionResult> PutIngrediente(int id, Ingrediente ingrediente)
         {
-            if (id != producto.IdProducto)
+            if (id != ingrediente.idIngrediente)
             {
-                return BadRequest("El ID del producto no coincide");
+                return BadRequest("El ID del ingrediente no coincide.");
             }
 
             try
             {
-                _context.Entry(producto).State = EntityState.Modified;
+                _context.Entry(ingrediente).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 return NoContent();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductoExists(id))
+                if (!IngredienteExists(id))
                 {
-                    return NotFound($"Producto con id {id} no encontrado");
+                    return NotFound($"Ingrediente con ID {id} no encontrado.");
                 }
                 else
                 {
@@ -102,17 +102,17 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProducto(int id)
+        public async Task<IActionResult> DeleteIngrediente(int id)
         {
             try
             {
-                var producto = await _context.Productos.FindAsync(id);
-                if (producto == null)
+                var ingrediente = await _context.Ingredientes.FindAsync(id);
+                if (ingrediente == null)
                 {
-                    return NotFound($"Producto con id {id} no encontrado");
+                    return NotFound($"Ingrediente con ID {id} no encontrado.");
                 }
 
-                _context.Productos.Remove(producto);
+                _context.Ingredientes.Remove(ingrediente);
                 await _context.SaveChangesAsync();
 
                 return NoContent();
@@ -123,9 +123,9 @@ namespace TiendaAPI.Controllers
             }
         }
 
-        private bool ProductoExists(int id)
+        private bool IngredienteExists(int id)
         {
-            return _context.Productos.Any(e => e.IdProducto == id);
+            return _context.Ingredientes.Any(e => e.idIngrediente == id);
         }
     }
 }

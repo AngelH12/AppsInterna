@@ -2,26 +2,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TiendaAPI.Data;
 using TiendaAPI.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace TiendaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductosController : ControllerBase
+    public class GuarnicionesController : ControllerBase
     {
         private readonly TiendaDbContext _context;
 
-        public ProductosController(TiendaDbContext context)
+        public GuarnicionesController(TiendaDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
+        public async Task<ActionResult<IEnumerable<Guarnicion>>> GetGuarniciones()
         {
             try
             {
-                var productos = await _context.Productos.ToListAsync();
-                return Ok(productos);
+                var guarniciones = await _context.Guarniciones.ToListAsync();
+                return Ok(guarniciones);
             }
             catch (Exception ex)
             {
@@ -30,18 +33,17 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Producto>> GetProducto(int id)
+        public async Task<ActionResult<Guarnicion>> GetGuarnicion(int id)
         {
             try
             {
-                var producto = await _context.Productos.FindAsync(id);
-
-                if (producto == null)
+                var guarnicion = await _context.Guarniciones.FindAsync(id);
+                if (guarnicion == null)
                 {
-                    return NotFound($"Producto con id {id} no encontrado");
+                    return NotFound($"Guarnición con ID {id} no encontrada.");
                 }
 
-                return Ok(producto);
+                return Ok(guarnicion);
             }
             catch (Exception ex)
             {
@@ -50,19 +52,19 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Producto>> PostProducto(Producto producto)
+        public async Task<ActionResult<Guarnicion>> PostGuarnicion(Guarnicion guarnicion)
         {
             try
             {
-                if (producto == null)
+                if (guarnicion == null)
                 {
-                    return BadRequest("El producto no puede ser nulo");
+                    return BadRequest("La guarnición no puede ser nula.");
                 }
 
-                _context.Productos.Add(producto);
+                _context.Guarniciones.Add(guarnicion);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetProducto), new { id = producto.IdProducto }, producto);
+                return CreatedAtAction(nameof(GetGuarnicion), new { id = guarnicion.idGuarnicion }, guarnicion);
             }
             catch (Exception ex)
             {
@@ -71,24 +73,24 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto(int id, Producto producto)
+        public async Task<IActionResult> PutGuarnicion(int id, Guarnicion guarnicion)
         {
-            if (id != producto.IdProducto)
+            if (id != guarnicion.idGuarnicion)
             {
-                return BadRequest("El ID del producto no coincide");
+                return BadRequest("El ID de la guarnición no coincide.");
             }
 
             try
             {
-                _context.Entry(producto).State = EntityState.Modified;
+                _context.Entry(guarnicion).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 return NoContent();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductoExists(id))
+                if (!GuarnicionExists(id))
                 {
-                    return NotFound($"Producto con id {id} no encontrado");
+                    return NotFound($"Guarnición con ID {id} no encontrada.");
                 }
                 else
                 {
@@ -102,17 +104,17 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProducto(int id)
+        public async Task<IActionResult> DeleteGuarnicion(int id)
         {
             try
             {
-                var producto = await _context.Productos.FindAsync(id);
-                if (producto == null)
+                var guarnicion = await _context.Guarniciones.FindAsync(id);
+                if (guarnicion == null)
                 {
-                    return NotFound($"Producto con id {id} no encontrado");
+                    return NotFound($"Guarnición con ID {id} no encontrada.");
                 }
 
-                _context.Productos.Remove(producto);
+                _context.Guarniciones.Remove(guarnicion);
                 await _context.SaveChangesAsync();
 
                 return NoContent();
@@ -123,9 +125,9 @@ namespace TiendaAPI.Controllers
             }
         }
 
-        private bool ProductoExists(int id)
+        private bool GuarnicionExists(int id)
         {
-            return _context.Productos.Any(e => e.IdProducto == id);
+            return _context.Guarniciones.Any(e => e.idGuarnicion == id);
         }
     }
 }

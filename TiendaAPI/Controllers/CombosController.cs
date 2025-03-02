@@ -2,26 +2,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TiendaAPI.Data;
 using TiendaAPI.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace TiendaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductosController : ControllerBase
+    public class CombosController : ControllerBase
     {
         private readonly TiendaDbContext _context;
 
-        public ProductosController(TiendaDbContext context)
+        public CombosController(TiendaDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
+        public async Task<ActionResult<IEnumerable<Combo>>> GetCombos()
         {
             try
             {
-                var productos = await _context.Productos.ToListAsync();
-                return Ok(productos);
+                var combos = await _context.Combos.ToListAsync();
+                return Ok(combos);
             }
             catch (Exception ex)
             {
@@ -30,18 +33,17 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Producto>> GetProducto(int id)
+        public async Task<ActionResult<Combo>> GetCombo(int id)
         {
             try
             {
-                var producto = await _context.Productos.FindAsync(id);
-
-                if (producto == null)
+                var combo = await _context.Combos.FindAsync(id);
+                if (combo == null)
                 {
-                    return NotFound($"Producto con id {id} no encontrado");
+                    return NotFound($"Combo con ID {id} no encontrado.");
                 }
 
-                return Ok(producto);
+                return Ok(combo);
             }
             catch (Exception ex)
             {
@@ -50,19 +52,19 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Producto>> PostProducto(Producto producto)
+        public async Task<ActionResult<Combo>> PostCombo(Combo combo)
         {
             try
             {
-                if (producto == null)
+                if (combo == null)
                 {
-                    return BadRequest("El producto no puede ser nulo");
+                    return BadRequest("El combo no puede ser nulo.");
                 }
 
-                _context.Productos.Add(producto);
+                _context.Combos.Add(combo);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetProducto), new { id = producto.IdProducto }, producto);
+                return CreatedAtAction(nameof(GetCombo), new { id = combo.idCombo }, combo);
             }
             catch (Exception ex)
             {
@@ -71,24 +73,24 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto(int id, Producto producto)
+        public async Task<IActionResult> PutCombo(int id, Combo combo)
         {
-            if (id != producto.IdProducto)
+            if (id != combo.idCombo)
             {
-                return BadRequest("El ID del producto no coincide");
+                return BadRequest("El ID del combo no coincide.");
             }
 
             try
             {
-                _context.Entry(producto).State = EntityState.Modified;
+                _context.Entry(combo).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 return NoContent();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductoExists(id))
+                if (!ComboExists(id))
                 {
-                    return NotFound($"Producto con id {id} no encontrado");
+                    return NotFound($"Combo con ID {id} no encontrado.");
                 }
                 else
                 {
@@ -102,17 +104,17 @@ namespace TiendaAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProducto(int id)
+        public async Task<IActionResult> DeleteCombo(int id)
         {
             try
             {
-                var producto = await _context.Productos.FindAsync(id);
-                if (producto == null)
+                var combo = await _context.Combos.FindAsync(id);
+                if (combo == null)
                 {
-                    return NotFound($"Producto con id {id} no encontrado");
+                    return NotFound($"Combo con ID {id} no encontrado.");
                 }
 
-                _context.Productos.Remove(producto);
+                _context.Combos.Remove(combo);
                 await _context.SaveChangesAsync();
 
                 return NoContent();
@@ -123,9 +125,9 @@ namespace TiendaAPI.Controllers
             }
         }
 
-        private bool ProductoExists(int id)
+        private bool ComboExists(int id)
         {
-            return _context.Productos.Any(e => e.IdProducto == id);
+            return _context.Combos.Any(e => e.idCombo == id);
         }
     }
 }

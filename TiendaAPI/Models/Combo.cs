@@ -1,10 +1,15 @@
-//namespace TiendaAPI.Models;
+using System.ComponentModel.DataAnnotations; 
 
-//public class Combo
-//{
-//    public int idCombo { get; set; }
-//    public string nombre { get; set; }
-//    public string descripcion { get; set; }
-//    public decimal precio { get; set; }
-//    public bool activo { get; set; }
-//}
+namespace TiendaAPI.Models
+{
+    public class Combo
+    {
+        [Key] 
+        public int idCombo { get; set; }
+
+        public string? nombre { get; set; }
+        public string? descripcion { get; set; }
+        public decimal? precio { get; set; }
+        public bool? activo { get; set; }
+    }
+}

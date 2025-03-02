@@ -11,5 +11,5 @@
         public string? UnidadMedida { get; set; }
         public string? Imagen { get; set; }
         public bool? Activo { get; set; }
-    } // ✅ Cierre correcto de la clase
-} // ✅ Cierre correcto del namespace
+    } 
+} 
