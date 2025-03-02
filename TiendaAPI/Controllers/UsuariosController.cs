@@ -25,8 +25,21 @@ public class UsuariosController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
     {
-        _context.Usuarios.Add(usuario);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetUsuarios), new { id = usuario.IdUsuario }, usuario);
+        if (usuario == null || string.IsNullOrEmpty(usuario.Contraseña))
+        {
+            return BadRequest("La contraseña no puede estar vacía");
+        }
+
+        try
+        {
+            _context.Usuarios.Add(usuario);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetUsuarios), new { id = usuario.IdUsuario }, usuario);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Error al crear usuario: {ex.Message}");
+        }
     }
+
 }
