@@ -28,7 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
           'Contraseña': _passwordController.text,
         }),
       );
-
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
 

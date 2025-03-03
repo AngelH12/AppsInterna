@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TiendaAPI.Data;
 using TiendaAPI.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using BCrypt.Net;
+using TiendaAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -705,5 +705,96 @@ app.MapDelete("/envios/{id}", async (TiendaDbContext db, int id) =>
         message = "Accion creada correctamente."
     });
 }).WithName("DeleteEnvio");
+
+app.MapGet("/sucursales", async (TiendaDbContext db) => await db.Sucursales.ToListAsync());
+
+app.MapGet("/sucursales/{id}", async (TiendaDbContext db, int id) =>
+{
+    var sucursal = await db.Sucursales.FindAsync(id);
+    return sucursal is not null ? Results.Ok(sucursal) : Results.NotFound();
+});
+
+app.MapPost("/sucursales", async (TiendaDbContext db, Sucursal sucursal) =>
+{
+    db.Sucursales.Add(sucursal);
+    await db.SaveChangesAsync();
+    return Results.Created($"/sucursales/{sucursal.IdSucursal}", sucursal);
+});
+
+app.MapPut("/sucursales/{id}", async (TiendaDbContext db, int id, Sucursal input) =>
+{
+    var sucursal = await db.Sucursales.FindAsync(id);
+    if (sucursal is null) return Results.NotFound();
+
+    sucursal.Nombre = input.Nombre;
+    sucursal.Direccion = input.Direccion;
+    sucursal.Telefono = input.Telefono;
+    sucursal.Activo = input.Activo;
+
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+app.MapDelete("/sucursales/{id}", async (TiendaDbContext db, int id) =>
+{
+    var sucursal = await db.Sucursales.FindAsync(id);
+    if (sucursal is null) return Results.NotFound();
+
+    db.Sucursales.Remove(sucursal);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+app.MapGet("/reportes", async (TiendaDbContext db) =>
+{
+    try
+    {
+        var reportes = await db.ReportesVentas
+            .Include(r => r.Sucursal) 
+            .ToListAsync();
+        return Results.Ok(reportes);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error al obtener reportes: {ex.Message}");
+    }
+}).WithName("GetReportesVentas");
+
+app.MapGet("/reportes/{id}", async (TiendaDbContext db, int id) =>
+{
+    var reporte = await db.ReportesVentas.FindAsync(id);
+    return reporte is not null ? Results.Ok(reporte) : Results.NotFound();
+}).WithName("GetReporteVenta");
+
+app.MapPost("/reportes", async (TiendaDbContext db, ReporteVenta reporte) =>
+{
+    db.ReportesVentas.Add(reporte);
+    await db.SaveChangesAsync();
+    return Results.Created($"/reportes/{reporte.IdReporte}", reporte);
+}).WithName("CreateReporteVenta");
+
+app.MapPut("/reportes/{id}", async (TiendaDbContext db, int id, ReporteVenta input) =>
+{
+    var reporte = await db.ReportesVentas.FindAsync(id);
+    if (reporte is null) return Results.NotFound();
+
+    reporte.IdSucursal = input.IdSucursal;
+    reporte.Fecha = input.Fecha;
+    reporte.TotalVentas = input.TotalVentas;
+
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("UpdateReporteVenta");
+
+app.MapDelete("/reportes/{id}", async (TiendaDbContext db, int id) =>
+{
+    var reporte = await db.ReportesVentas.FindAsync(id);
+    if (reporte is null) return Results.NotFound();
+
+    db.ReportesVentas.Remove(reporte);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+}).WithName("DeleteReporteVenta");
+
 
 app.Run();

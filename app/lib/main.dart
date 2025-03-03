@@ -3,6 +3,8 @@ import 'package:app/products_screen.dart';
 import 'package:app/proveedores_screen.dart';
 import 'package:app/reservas_screen.dart';
 import 'package:flutter/material.dart';
+import 'ReportesScreen.dart';
+import 'SucursalesScreen.dart';
 import 'combos_screen.dart';
 import 'envios_screen.dart';
 import 'guarniciones_screen.dart';
@@ -34,8 +36,9 @@ class MyApp extends StatelessWidget {
           "/proveedores": (context) => ProveedoresScreen(),
           "/reservas": (context) => ReservasScreen(),
           "/envios": (context) => EnviosScreen(),
-            "/guarniciones": (context) => GuarnicionesScreen(),
-
+          "/guarniciones": (context) => GuarnicionesScreen(),
+          '/': (context) => SucursalesScreen(),
+          '/reportes': (context) => ReportesScreen(),
         });
   }
 }
