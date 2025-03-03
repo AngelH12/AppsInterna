@@ -17,7 +17,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   Future<void> _fetchProductos() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:5000/productos'));
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:5000/productos'));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = jsonDecode(response.body);
@@ -32,7 +33,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   Future<void> _deleteProducto(int id) async {
-    final response = await http.delete(Uri.parse('http://10.0.2.2:5000/productos/$id'));
+    final response =
+        await http.delete(Uri.parse('http://10.0.2.2:5000/productos/$id'));
 
     if (response.statusCode == 200) {
       setState(() {
@@ -66,13 +68,24 @@ class _ProductsScreenState extends State<ProductsScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextField(controller: nombreController, decoration: InputDecoration(labelText: 'Nombre')),
-                TextField(controller: descripcionController, decoration: InputDecoration(labelText: 'Descripción')),
-                TextField(controller: precioController, decoration: InputDecoration(labelText: 'Precio')),
-                TextField(controller: tipoController, decoration: InputDecoration(labelText: 'Tipo Producto')),
-                TextField(controller: stockController, decoration: InputDecoration(labelText: 'Stock')),
-                TextField(controller: unidadController, decoration: InputDecoration(labelText: 'Unidad de Medida')),
-                TextField(controller: imagenController, decoration: InputDecoration(labelText: 'URL Imagen')),
+                TextField(
+                    controller: nombreController,
+                    decoration: InputDecoration(labelText: 'Nombre')),
+                TextField(
+                    controller: descripcionController,
+                    decoration: InputDecoration(labelText: 'Descripción')),
+                TextField(
+                    controller: precioController,
+                    decoration: InputDecoration(labelText: 'Precio')),
+                TextField(
+                    controller: tipoController,
+                    decoration: InputDecoration(labelText: 'Tipo Producto')),
+                TextField(
+                    controller: stockController,
+                    decoration: InputDecoration(labelText: 'Stock')),
+                TextField(
+                    controller: unidadController,
+                    decoration: InputDecoration(labelText: 'Unidad de Medida')),
               ],
             ),
           ),
@@ -83,28 +96,33 @@ class _ProductsScreenState extends State<ProductsScreen> {
             ),
             ElevatedButton(
               onPressed: () async {
+                Map<String, dynamic> productoData = {
+                  'nombre': nombreController.text,
+                  'descripcion': descripcionController.text,
+                  'precio': double.parse(precioController.text),
+                  'tipoProducto': tipoController.text,
+                  'stock': int.parse(stockController.text),
+                  'unidadMedida': unidadController.text,
+                  'imagen': "https://example.com/laptop-hp.jpg",
+                  'activo': true,
+                };
+
+
                 final response = await http.post(
                   Uri.parse('http://10.0.2.2:5000/productos'),
                   headers: {'Content-Type': 'application/json'},
-                  body: jsonEncode({
-                    'nombre': nombreController.text,
-                    'descripcion': descripcionController.text,
-                    'precio': double.parse(precioController.text),
-                    'tipoProducto': tipoController.text,
-                    'stock': int.parse(stockController.text),
-                    'unidadMedida': unidadController.text,
-                    'imagen': imagenController.text,
-                    'activo': true,
-                  }),
+                  body: jsonEncode(productoData),
                 );
 
-                if (response.statusCode == 201) {
+                if (response.statusCode == 200) {
                   _fetchProductos();
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Producto agregado')),
                   );
                 } else {
+                  print("response${response}");
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Error al agregar producto')),
                   );
@@ -153,7 +171,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       children: [
                         IconButton(
                           icon: Icon(Icons.delete, color: Colors.red),
-                          onPressed: () => _deleteProducto(producto['idProducto']),
+                          onPressed: () =>
+                              _deleteProducto(producto['idProducto']),
                         ),
                       ],
                     )),
