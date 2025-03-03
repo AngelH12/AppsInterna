@@ -6,11 +6,9 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { Link } from 'react-router-dom';
-import { GuarnicionInterface } from 'interfaces/Guarnicion';
-import { useuseGuarnicionesStore } from 'feature/Guarniciones/store';
 import { CreateroPedido, DeletedPedido, PedidoService, UpdatePedido } from 'services/service.cruds/Pedidos/Pedidos';
 import { usePedidosStore } from '../store';
-import { EnvioInterface, PedidoInterface } from 'interfaces/Pedidos/Pedidos';
+import { PedidoInterface } from 'interfaces/Pedidos/Pedidos';
 
 export const usePedidos = () => {
     const [userRows, setUserRows] = useState<any[]>([]);

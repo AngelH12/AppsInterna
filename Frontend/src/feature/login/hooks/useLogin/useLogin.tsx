@@ -61,7 +61,6 @@ export const useLogin = () => {
       try {
         const response: LoginResponse = await LoginService(payload);
 
-        console.log("response",    response)
         if (response.message === "Inicio de sesión exitoso.") {
           setSession(response );
           setIsLogued({ success: true, error: false, errorMessage: "" });

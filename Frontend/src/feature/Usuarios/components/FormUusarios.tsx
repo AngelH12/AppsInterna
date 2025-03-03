@@ -15,7 +15,7 @@ export const FormUusarios: React.FC<FormCformUusariosProps> = ({
     formik,
     isEdit,
 }) => {
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword] = useState(false);
 
     return (
         <form onSubmit={formik.handleSubmit}>

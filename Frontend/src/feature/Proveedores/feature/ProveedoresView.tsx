@@ -1,10 +1,9 @@
 import BreadCrumb from "Common/BreadCrumb";
 import TableContainer from "Common/TableContainer";
 import { motion } from "framer-motion";
-import { User, Shield, Users, Beef } from "lucide-react";
+import {  Shield, Users, Beef } from "lucide-react";
 import { DotLoader } from "react-spinners";
 import DeleteModal from "Common/DeleteModal";
-import { Landmark } from "lucide-react";
 import { FormProveedores } from "../../Proveedores/components/FormProveedores";
 import { useProveedores } from "../hooks/useProveedores";
 
@@ -19,8 +18,6 @@ export const ProveedoresView = () => {
     onHideModal,
     onDeleteConfirm,
     isEdit,
-    setIsDulce,
-    isDulce
   } = useProveedores();
 
   return (

@@ -1,6 +1,5 @@
 
 
-import { EnvioInterface, PedidoInterface } from "interfaces/Pedidos/Pedidos";
 import { ProveedorInterface } from "interfaces/Proveedor/Proveedor";
 import { create } from "zustand";
 

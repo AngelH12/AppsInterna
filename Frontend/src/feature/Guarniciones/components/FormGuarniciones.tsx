@@ -1,7 +1,7 @@
 import { DottedButton } from 'Common/Buttons';
 import { BasicInput, SelectComponent } from 'Common/Components';
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React from 'react';
 
 
 interface FormCformUusariosProps {

@@ -1,10 +1,9 @@
 import BreadCrumb from "Common/BreadCrumb";
 import TableContainer from "Common/TableContainer";
 import { motion } from "framer-motion";
-import { User, Shield, Users, Beef, Receipt } from "lucide-react";
+import {  Shield, Users, Beef, Receipt } from "lucide-react";
 import { DotLoader } from "react-spinners";
 import DeleteModal from "Common/DeleteModal";
-import { Landmark } from "lucide-react";
 import { FormReservas } from "../components";
 import { useReservas } from "../hooks";
 
@@ -19,8 +18,6 @@ export const ReservasView = () => {
     onHideModal,
     onDeleteConfirm,
     isEdit,
-    setIsDulce,
-    isDulce
   } = useReservas();
 
   return (

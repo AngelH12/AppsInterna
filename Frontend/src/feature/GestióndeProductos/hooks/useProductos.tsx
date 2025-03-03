@@ -6,9 +6,6 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { Link } from 'react-router-dom';
-import { UsuarioInterface } from 'interfaces/user';
-import { CreaterUser, DeletedUser, UpdateUser, UserService } from 'services/service.cruds/Usuarios';
-import { useUsuarioStore } from 'feature/Usuarios/store';
 import { CreaterProductos, DeletedProductos, ProductosService, UpdateProductos } from 'services/service.cruds/Productos';
 import { ProductoInterface } from 'interfaces/Producto/Producto';
 import { useProductosStore } from '../store';
@@ -22,7 +19,6 @@ export const useProductos = () => {
     const { setIsEdit, entity, isEdit, setIdToDelete, setEntity, idToDelete} = useProductosStore();
     const queryClient = useQueryClient();
     const [isDulce, setIsDulce] = useState(false);
-    const [filtroTipoProducto, setFiltroTipoProducto] = useState<string>(""); 
 
     useEffect(() => {
         if (entity) {
@@ -114,11 +110,9 @@ export const useProductos = () => {
     const create = async (payload: any) => {
         try {
 
-            console.log("payload")
 
             const response = await CreaterProductos(payload)
 
-            console.log("response", response)
 
             if (response.success === true) {
                 setTimeout(() => {

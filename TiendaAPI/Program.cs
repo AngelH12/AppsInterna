@@ -59,7 +59,6 @@ app.MapPost("/login", async (TiendaDbContext db, UsuarioLogin login) =>
         return Results.Json(new { message = "El usuario no está registrado." }, statusCode: 404);
     }
 
-    // Verificar si la contraseña es válida
     if (!BCrypt.Net.BCrypt.Verify(login.Contraseña, user.Contraseña))
     {
         return Results.Json(new { message = "Credenciales incorrectas." }, statusCode: 401);

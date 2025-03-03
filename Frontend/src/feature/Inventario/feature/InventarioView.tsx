@@ -4,9 +4,6 @@ import { motion } from "framer-motion";
 import { User, Shield, Users, PackageSearch, Utensils, ArchiveRestore } from "lucide-react";
 import { DotLoader } from "react-spinners";
 import DeleteModal from "Common/DeleteModal";
-import { Landmark } from "lucide-react";
-
-import { useState } from "react";
 import { useInventarioView } from "../hooks";
 import { FormInventario } from "../components";
 
@@ -22,8 +19,6 @@ export const InventarioView = () => {
     onHideModal,
     onDeleteConfirm,
     isEdit,
-    setIsDulce,
-    isDulce
   } = useInventarioView();
 
 

@@ -3,11 +3,10 @@ import { DottedButton } from "Common/Buttons";
 import { BasicInput, Carousel } from "Common/Components";
 import { useLogin } from "feature/login/hooks";
 import { DotLoader } from "react-spinners";
-import { FiEye, FiEyeOff } from "react-icons/fi";
 import "react-toastify/dist/ReactToastify.css";
 
 export const LoginView = () => {
-  const { formik, showPassword, setShowPassword, loading, isSubmitLogin, isMobile, images } = useLogin();
+  const { formik, showPassword, loading, isSubmitLogin, isMobile, images } = useLogin();
 
   if (!formik) {
     return <p className="text-center text-gray-500">Cargando...</p>;

@@ -1,6 +1,5 @@
 
 
-import { ComboInterface } from "interfaces/Combos";
 import { InventarioInterface } from "interfaces/Ingrediente/Ingrediente";
 import { create } from "zustand";
 

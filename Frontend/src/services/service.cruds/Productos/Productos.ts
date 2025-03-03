@@ -1,5 +1,5 @@
 import { ProductoInterface } from "interfaces/Producto/Producto";
-import { deleteById, get, patch, post, put, remove } from "services/services.methods";
+import { deleteById, get, post, put } from "services/services.methods";
 import { ProductosPaths } from "services/services.paths";
 
 export const ProductosService = async () => {

@@ -1,13 +1,11 @@
 import BreadCrumb from "Common/BreadCrumb";
 import TableContainer from "Common/TableContainer";
 import { motion } from "framer-motion";
-import { User, Shield, Users, PackageSearch } from "lucide-react";
+import { Shield, Users, PackageSearch } from "lucide-react";
 import { DotLoader } from "react-spinners";
 import DeleteModal from "Common/DeleteModal";
-import { Landmark } from "lucide-react";
 import { FormProductos } from "../components";
 import { useProductos } from "../hooks";
-import { useState } from "react";
 
 export const ProductosView = () => {
   const {

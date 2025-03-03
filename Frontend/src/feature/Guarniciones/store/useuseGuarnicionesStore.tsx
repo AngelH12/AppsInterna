@@ -1,7 +1,6 @@
 
 
 import { GuarnicionInterface } from "interfaces/Guarnicion";
-import { ProductoInterface } from "interfaces/Producto/Producto";
 import { create } from "zustand";
 
 interface ProductoState {

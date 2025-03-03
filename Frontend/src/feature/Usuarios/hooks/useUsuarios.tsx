@@ -96,7 +96,6 @@ export const useUsuarios = () => {
 
             const response = await CreaterUser(payload)
 
-            console.log("response", response)
 
             if (response.message === "Usuario creado exitosamente.") {
                 setTimeout(() => {
@@ -136,7 +135,6 @@ export const useUsuarios = () => {
     }
 
     const createRows = (users: any) => {
-        console.log("users", users);
     
         if (!users || users.length === 0) {
             showNotifications(

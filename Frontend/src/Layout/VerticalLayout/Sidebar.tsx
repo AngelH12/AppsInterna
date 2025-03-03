@@ -1,11 +1,8 @@
 import React from "react";
-
-
 import { Link } from "react-router-dom";
-
 import withRouter from "Common/withRouter";
 import SimpleBar from "simplebar-react";
-import { Building2, LayoutGrid, LogOut } from "lucide-react";
+import { Building2, LayoutGrid } from "lucide-react";
 import VerticalLayout from ".";
 
 const Sidebar = ({ layoutType, layoutSidebarSizeType }: any) => {

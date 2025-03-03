@@ -6,11 +6,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { Link } from 'react-router-dom';
-import { CreaterProductos, DeletedProductos, ProductosService, UpdateProductos } from 'services/service.cruds/Productos';
-import { ProductoInterface } from 'interfaces/Producto/Producto';
-import { useProductosStore } from 'feature/GestióndeProductos/store';
 import { CombosService, CreaterCombos, DeletedCombos, UpdateCombos } from 'services/service.cruds/Combos';
-import { GuarnicionInterface } from 'interfaces/Guarnicion';
 import { ComboInterface } from 'interfaces/Combos';
 import { useCombosStore } from '../store';
 
