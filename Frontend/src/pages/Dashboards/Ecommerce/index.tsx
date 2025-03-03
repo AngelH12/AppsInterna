@@ -1,59 +1,76 @@
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from "recharts";
-import BreadCrumb from "Common/BreadCrumb";
-import { FaUtensils, FaChartLine, FaMoneyBillWave, FaTrash } from "react-icons/fa";
+import { useQuery } from '@tanstack/react-query';
+import { ReportesService } from "services/service.cruds/Reportes/Reportes";
 import { motion } from "framer-motion";
-
-const dataVentas = [
-  { name: "Enero", ventas: 4000 },
-  { name: "Feb", ventas: 3000 },
-  { name: "Mar", ventas: 5000 },
-  { name: "Abr", ventas: 4500 },
-];
-
-const dataPlatos = [
-  { name: "Churrasco", value: 35 },
-  { name: "Tacos", value: 25 },
-  { name: "Hamburguesa", value: 20 },
-  { name: "Pupusas", value: 20 },
-];
-
-const dataLine = [
-  { name: "Semana 1", ingresos: 5000, costos: 2000 },
-  { name: "Semana 2", ingresos: 7000, costos: 2500 },
-  { name: "Semana 3", ingresos: 8000, costos: 3000 },
-  { name: "Semana 4", ingresos: 9000, costos: 4000 },
-];
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from "recharts";
+import { FaChartLine, FaMoneyBillWave, FaUtensils, FaTrash } from "react-icons/fa";
 
 const COLORS = ["#FF8042", "#0088FE", "#FFBB28", "#00C49F"];
 
-
 const Analytics = () => {
-  return (
-    <React.Fragment>
-      <BreadCrumb title="Ecommerce" pageTitle="Dashboards" />
+  const { data } = useQuery({
+    queryKey: ["reportes"],
+    queryFn: ReportesService,
+  });
 
-      <div className="grid grid-cols-12 gap-5 p-4">
-        {[
-          { icon: <FaChartLine className="text-blue-500 text-4xl" />, title: "Ventas Diarias", value: "Q. 5,200" },
-          { icon: <FaMoneyBillWave className="text-green-500 text-4xl" />, title: "Ganancias Mensuales", value: "Q. 20,000" },
-          { icon: <FaUtensils className="text-yellow-500 text-4xl" />, title: "Platos más vendidos", value: "Churrasco" },
-          { icon: <FaTrash className="text-red-500 text-4xl" />, title: "Desperdicios", value: "Q. 500" },
-        ].map((card, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="col-span-3 bg-white p-5 rounded-lg shadow-md flex items-center gap-4"
-          >
-            {card.icon}
-            <div>
-              <p className="text-gray-500 text-sm">{card.title}</p>
-              <h3 className="text-xl font-bold">{card.value}</h3>
-            </div>
-          </motion.div>
-        ))}
+  const reportes = Array.isArray(data) ? data : [];
+
+  const ventasMensuales = reportes.reduce((acc: { [x: string]: any; }, reporte: { fecha: string | number | Date; totalVentas: any; }) => {
+    const mes = new Date(reporte.fecha).toLocaleString("es-ES", { month: "short" }); 
+    acc[mes] = (acc[mes] || 0) + reporte.totalVentas;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const dataVentas = Object.keys(ventasMensuales).map(mes => ({
+    name: mes.charAt(0).toUpperCase() + mes.slice(1), 
+    ventas: ventasMensuales[mes],
+  }));
+
+  const productosVendidos = reportes.reduce((acc: { [x: string]: any; }, reporte: { productosVendidos: any; }) => {
+    acc["Productos"] = (acc["Productos"] || 0) + reporte.productosVendidos;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const dataPlatos = Object.keys(productosVendidos).map(plato => ({
+    name: plato,
+    value: productosVendidos[plato],
+  }));
+
+  const dataLine = reportes.map((reporte: { totalVentas: number; }, index: number) => ({
+    name: `Semana ${index + 1}`,
+    ingresos: reporte.totalVentas,
+    costos: reporte.totalVentas * 0.4,
+  }));
+
+  const totalVentasDiarias = reportes.reduce((acc, reporte) => acc + (reporte.totalVentas || 0), 0);
+  const totalProductosVendidos = reportes.reduce((acc, reporte) => acc + (reporte.productosVendidos || 0), 0);
+
+
+  return (
+
+    <><div className="grid grid-cols-12 gap-5 p-4">
+      {[
+        { icon: <FaChartLine className="text-blue-500 text-4xl" />, title: "Ventas Diarias", value: `Q. ${totalVentasDiarias.toLocaleString()}` },
+        { icon: <FaMoneyBillWave className="text-green-500 text-4xl" />, title: "Ganancias Mensuales", value: `${totalProductosVendidos} productos` },
+        { icon: <FaUtensils className="text-yellow-500 text-4xl" />, title: "Platos más vendidos", value: "Churrasco" },
+      ].map((card, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.2 }}
+          className="col-span-3 bg-white p-5 rounded-lg shadow-md flex items-center gap-4"
+        >
+          {card.icon}
+          <div>
+            <p className="text-gray-500 text-sm">{card.title}</p>
+            <h3 className="text-xl font-bold">{card.value}</h3>
+          </div>
+        </motion.div>
+      ))}
+    </div><div className="grid grid-cols-12 gap-5 p-4">
+
+
 
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -108,8 +125,8 @@ const Analytics = () => {
             </LineChart>
           </ResponsiveContainer>
         </motion.div>
-      </div>
-    </React.Fragment>
+
+      </div></>
   );
 };
 

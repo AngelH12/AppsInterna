@@ -75,6 +75,18 @@
     delete = ProveedoresPaths.basePath,
   }
 
+  export enum ReportePaths {
+    basePath = "reportes",
+    get = ReportePaths.basePath,
+    post = ReportePaths.basePath,
+    put = ReportePaths.basePath,
+    delete = ReportePaths.basePath,
+  }
+
+
+
+
+
 
 
 
