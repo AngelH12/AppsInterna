@@ -46,6 +46,8 @@ var app = builder.Build();
 
 app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
+app.UseAuthentication();
+//app.UseAuthorization();
 
 
 app.MapPost("/login", async (TiendaDbContext db, UsuarioLogin login) =>
@@ -57,6 +59,7 @@ app.MapPost("/login", async (TiendaDbContext db, UsuarioLogin login) =>
         return Results.Json(new { message = "El usuario no está registrado." }, statusCode: 404);
     }
 
+    // Verificar si la contraseña es válida
     if (!BCrypt.Net.BCrypt.Verify(login.Contraseña, user.Contraseña))
     {
         return Results.Json(new { message = "Credenciales incorrectas." }, statusCode: 401);
@@ -66,22 +69,27 @@ app.MapPost("/login", async (TiendaDbContext db, UsuarioLogin login) =>
     {
         new Claim(ClaimTypes.Name, user.Nombre ?? ""),
         new Claim(ClaimTypes.Email, user.Correo ?? ""),
-        new Claim(ClaimTypes.Role, user.Rol ?? "")
+        new Claim(ClaimTypes.Role, user.Rol?.Trim() ?? "")
     };
 
-    var secretKey = "EsteEsUnSuperSecretoParaJWT123456789012345!";
+    var secretKey = jwtSettings["SecretKey"];
     var key = Encoding.UTF8.GetBytes(secretKey);
     var creds = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
 
     var token = new JwtSecurityToken(
-        issuer: "TiendaAPI",
-        audience: "TiendaAPIUsers",
+        issuer: jwtSettings["Issuer"],
+        audience: jwtSettings["Audience"],
         claims: claims,
         expires: DateTime.UtcNow.AddMinutes(60),
         signingCredentials: creds
     );
 
-    return Results.Ok(new { message = "Inicio de sesión exitoso.", Token = new JwtSecurityTokenHandler().WriteToken(token), user.Rol });
+    return Results.Ok(new
+    {
+        message = "Inicio de sesión exitoso.",
+        Token = new JwtSecurityTokenHandler().WriteToken(token),
+        Rol = user.Rol?.Trim()
+    });
 }).WithName("Login");
 
 
@@ -109,6 +117,8 @@ app.MapPost("/usuarios", async (TiendaDbContext db, Usuario usuario) =>
             message = $"El correo {usuario.Correo} ya está registrado."
         });
     }
+
+    usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuario.Contraseña);
 
     db.Usuarios.Add(usuario);
     await db.SaveChangesAsync();
@@ -432,11 +442,8 @@ app.MapGet("/detallecombo", async (TiendaDbContext db) =>
             .Include(dc => dc.Combo)
             .Include(dc => dc.Producto)
             .ToListAsync();
-        return Results.Ok(new
-        {
-            success = true,
-            message = "Accion creada correctamente."
-        });
+        return Results.Ok(detalles);
+
     }
     catch (Exception ex)
     {
@@ -656,7 +663,11 @@ app.MapPost("/envios", async (TiendaDbContext db, Envio envio) =>
 
     db.Envios.Add(envio);
     await db.SaveChangesAsync();
-    return Results.Created($"/envios/{envio.idEnvio}", envio);
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("CreateEnvio");
 
 app.MapPut("/envios/{id}", async (TiendaDbContext db, int id, Envio envio) =>
@@ -674,7 +685,11 @@ app.MapPut("/envios/{id}", async (TiendaDbContext db, int id, Envio envio) =>
 
     db.Entry(envioExistente).CurrentValues.SetValues(envio);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("UpdateEnvio");
 
 app.MapDelete("/envios/{id}", async (TiendaDbContext db, int id) =>
@@ -684,7 +699,11 @@ app.MapDelete("/envios/{id}", async (TiendaDbContext db, int id) =>
 
     db.Envios.Remove(envio);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+    return Results.Ok(new
+    {
+        success = true,
+        message = "Accion creada correctamente."
+    });
 }).WithName("DeleteEnvio");
 
 app.Run();

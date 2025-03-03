@@ -1,9 +1,14 @@
 import {
   Beef,
+  Clock,
   FolderKanban,
+  Hotel,
+  PackageOpen,
   PackageSearch,
+  Plane,
   Salad,
   ShieldEllipsis,
+  UserPlus,
   Utensils
 } from "lucide-react";
 
@@ -67,6 +72,89 @@ const menuData: any = [
       },
     ],
   },
+
+
+
+
+
+
+  {
+    id: "Envios",
+    label: "Gestión de Envios",
+    link: "/Envios",
+    icon: <Plane />,
+    subItems: [
+      {
+        id: 'Envios',
+        label: 'Envios',
+        link: '/Envios',
+        parentId: 'Envios',
+      },
+    ],
+  },
+  {
+    id: "Inventario",
+    label: "Gestión de Inventario",
+    link: "/Inventario",
+    icon: <PackageOpen />,
+    subItems: [
+      {
+        id: 'user',
+        label: 'Inventario',
+        link: '/Inventario',
+        parentId: 'Inventario',
+      },
+    ],
+  },  
+  
+  {
+    id: "Pedidos",
+    label: "Gestión de Pedidos",
+    link: "/Pedidos",
+    icon: <Clock />,
+    subItems: [
+      {
+        id: 'Pedidos',
+        label: 'Pedidos',
+        link: '/Pedidos',
+        parentId: 'Pedidos',
+      },
+    ],
+  },  {
+    id: "Reservas",
+    label: "Gestión de Reservas",
+    link: "/Reservas",
+    icon: <Hotel />,
+    subItems: [
+      {
+        id: 'user',
+        label: 'Reservas',
+        link: '/Reservas',
+        parentId: 'Reservas',
+      },
+    ],
+  },
+  {
+    id: "Proveedores",
+    label: "Gestión de Proveedores",
+    link: "/Proveedores",
+    icon: <UserPlus />,
+    subItems: [
+      {
+        id: 'user',
+        label: 'Proveedores',
+        link: '/Proveedores',
+        parentId: 'Proveedores',
+      },
+    ],
+  },
+
+
+
+
+
+
+
 ];
 
 export { menuData };

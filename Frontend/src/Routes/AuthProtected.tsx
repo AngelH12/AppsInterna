@@ -10,8 +10,6 @@ const AuthProtected: React.FC<AuthProtectedProps> = ({ children }) => {
 
   const { session, isAuthtenticated } = useSessionStore();
 
-  console.log("session", session)
-
 
   if (!session?.token || !isAuthtenticated) {
     return <Navigate to={{ pathname: "/login" }} />;

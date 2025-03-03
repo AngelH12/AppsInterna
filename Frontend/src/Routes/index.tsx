@@ -6,10 +6,15 @@ import NonAuthLayout from "Layout/NonLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import AuthProtected from "./AuthProtected";
+import { useSessionStore } from "Common/Stores";
 
 const queryClient = new QueryClient();
 
+  
 const RouteIndex = () => {
+  const { session } = useSessionStore();
+
+  const user = session?.rol
   return (
     <QueryClientProvider client={queryClient}>
       <React.Fragment>
@@ -22,7 +27,11 @@ const RouteIndex = () => {
                 <AuthProtected>
                   <Layout>
                     <Suspense fallback={<div>Loading...</div>}>
-                      <route.component />
+                      {route.roles && !route.roles.includes(user) ? (
+                        <div>No tienes permiso para acceder a esta página</div>
+                      ) : (
+                        <route.component />
+                      )}
                     </Suspense>
                   </Layout>
                 </AuthProtected>

@@ -15,8 +15,8 @@ export const FormUusarios: React.FC<FormCformUusariosProps> = ({
     formik,
     isEdit,
 }) => {
-      const [showPassword, setShowPassword] = useState(false);
-    
+    const [showPassword, setShowPassword] = useState(false);
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className="w-full flex flex-col  gap-4">
@@ -97,19 +97,20 @@ export const FormUusarios: React.FC<FormCformUusariosProps> = ({
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 1, delay: 0.2 }}
                                 >
-                                    <BasicInput
-                                        type="text"
+
+                                    <SelectComponent
                                         id="rol"
-                                        value={formik.values.departamento_descripcion}
-                                        onChange={formik.handleChange}
-                                        placeholder="Ingrese un rol"
-                                        label="Rol"
-                                        isError={!!(formik.touched.departamento_descripcion && formik.errors.departamento_descripcion)}
-                                        errorMessage={formik.errors.departamento_descripcion || ""}
-                                        onBlur={formik.handleBlur}
+                                        value={formik.values.rol
+                                            ? { label: formik.values.rol, value: formik.values.rol }
+                                            : undefined}
+                                        onChange={(selectedOption) => formik.setFieldValue("rol", selectedOption?.value)}
+                                        label="rol"
+                                        options={[
+                                            { label: "Admin ", value: "Admin" },
+                                            { label: "Gerente ", value: "Gerente " },
+                                            { label: "Cajero ", value: "Cajero" }
+                                        ]}
                                     />
-
-
                                 </motion.div>
 
                             </div>

@@ -37,6 +37,45 @@
     delete = CombosnPaths.basePath,
   }
 
+  // -----------------------------------
+
+  export enum EnviosPaths {
+    basePath = "envios",
+    get = EnviosPaths.basePath,
+    post = EnviosPaths.basePath,
+    put = EnviosPaths.basePath,
+    delete = EnviosPaths.basePath,
+  }
+  export enum InventarioPaths {
+    basePath = "inventario",
+    get = InventarioPaths.basePath,
+    post = InventarioPaths.basePath,
+    put = InventarioPaths.basePath,
+    delete = InventarioPaths.basePath,
+  }
+  export enum PedidosPaths {
+    basePath = "Pedidos",
+    get = PedidosPaths.basePath,
+    post = PedidosPaths.basePath,
+    put = PedidosPaths.basePath,
+    delete = PedidosPaths.basePath,
+  }
+  export enum ReservasPaths {
+    basePath = "Reservas",
+    get = ReservasPaths.basePath,
+    post = ReservasPaths.basePath,
+    put = ReservasPaths.basePath,
+    delete = ReservasPaths.basePath,
+  }
+  export enum ProveedoresPaths {
+    basePath = "Proveedores",
+    get = ProveedoresPaths.basePath,
+    post = ProveedoresPaths.basePath,
+    put = ProveedoresPaths.basePath,
+    delete = ProveedoresPaths.basePath,
+  }
+
+
 
 
 
