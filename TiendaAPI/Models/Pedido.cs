@@ -16,5 +16,9 @@ namespace TiendaAPI.Models
         public DateTime? fechaPedido { get; set; } = DateTime.Now;
         public decimal? total { get; set; }
         public string? estado { get; set; }
+
+        public List<DetallePedido> DetallePedidos { get; set; } = new List<DetallePedido>();
+
+
     }
 }
